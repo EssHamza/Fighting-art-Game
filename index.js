@@ -6,22 +6,94 @@ canvas.height = 576
 
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
+const gravity = 0.2;
+
 class Character {
-    constructor(position){
+    constructor({position, velocity}){
         this.position = position 
+        this.velocity = velocity
+        this.height = 150
     }
 
-    draw(){
+    drawing(){
         ctx.fillStyle = 'red'
-        ctx.fillRect()
+        ctx.fillRect(this.position.x,this.position.y,50,this.height)
     }
-    
 
+    update(){
+     this.drawing()
+     
+     this.position.x += this.velocity.x
+     this.position.y += this.velocity.y
+
+     if(this.position.y + this.height + this.velocity.y  >= canvas.height){
+        this.velocity.y = 0
+        
+     }else{
+         this.velocity.y += gravity;
+     } 
+  }
 }
 
-const player = new Character (
-    {
-        x:0,
-        y:0
+//player 
+const player = new Character ({
+    position : {
+        x: 0,
+        y: 0
+ },
+    velocity : { 
+        x: 0,
+        y: 10
+}
+})
+
+
+
+ //enemy
+
+ const enemy = new Character ({
+    position : {
+        x: 400,
+        y: 100
+ },
+    velocity : { 
+        x: 0,
+        y: 0
+}
+})
+
+ 
+
+
+ function gameLoop(){
+     window.requestAnimationFrame(gameLoop)
+     ctx.fillStyle = 'black'
+     ctx.fillRect(0,0,canvas.width ,canvas.height)
+     player.update()
+     enemy.update()
+ }
+
+ gameLoop();
+
+ window.addEventListener('keydown',(event) => {
+    switch(event.key){
+        case 'd' : 
+        player.velocity.x = 1
+        break 
+        case 'q' : 
+        player.velocity.x = -1
+        break
     }
-)
+    console.log(event.key)
+ })
+ window.addEventListener('keyup',(event) => {
+    switch(event.key){
+        case 'd' : 
+        player.velocity.x = 0
+        break 
+        case 'q' : 
+        player.velocity.x = 0
+        break
+    }
+    console.log(event.key)
+ })

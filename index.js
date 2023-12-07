@@ -62,7 +62,34 @@ const player = new Character ({
 }
 })
 
- 
+ const keys = {
+     a : {
+        pressed : false 
+     },
+     d : {
+        pressed : false 
+     }
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  function gameLoop(){
@@ -71,6 +98,13 @@ const player = new Character ({
      ctx.fillRect(0,0,canvas.width ,canvas.height)
      player.update()
      enemy.update()
+
+     player.velocity.x = 0
+     if(keys.a.pressed){
+         player.velocity.x = -1
+     }else if (keys.d.pressed){
+        player.velocity.x = 1 
+     }
  }
 
  gameLoop();
@@ -78,10 +112,10 @@ const player = new Character ({
  window.addEventListener('keydown',(event) => {
     switch(event.key){
         case 'd' : 
-        player.velocity.x = 1
+        keys.d.pressed = true
         break 
-        case 'q' : 
-        player.velocity.x = -1
+        case 'a' : 
+        keys.a.pressed = true
         break
     }
     console.log(event.key)
@@ -89,11 +123,13 @@ const player = new Character ({
  window.addEventListener('keyup',(event) => {
     switch(event.key){
         case 'd' : 
-        player.velocity.x = 0
+        keys.d.pressed = false
         break 
-        case 'q' : 
-        player.velocity.x = 0
-        break
+        case 'a' : 
+        keys.a.pressed = false
+        break  
+        
+
     }
     console.log(event.key)
  })

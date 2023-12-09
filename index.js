@@ -13,6 +13,7 @@ class Character {
         this.position = position 
         this.velocity = velocity
         this.height = 150
+        this.lastKey
     }
 
     drawing(){
@@ -68,24 +69,17 @@ const player = new Character ({
      },
      d : {
         pressed : false 
+     },
+     w : {
+         pressed : false
+     },
+     ArrowRight : {
+        pressed : false
+     },
+     ArrowLeft : {
+        pressed : false
      }
  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -100,9 +94,18 @@ const player = new Character ({
      enemy.update()
 
      player.velocity.x = 0
-     if(keys.a.pressed){
+     enemy.velocity.x = 0
+
+     //enemy movement
+     if(keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){
+        enemy.velocity.x = -1
+    }else if (keys.ArrowRight.pressed  && enemy.lastKey === 'ArrowRight' ){
+       enemy.velocity.x = 1 
+    }
+     //player movement
+     if(keys.a.pressed && player.lastKey === 'a'){
          player.velocity.x = -1
-     }else if (keys.d.pressed){
+     }else if (keys.d.pressed  && player.lastKey === 'd' ){
         player.velocity.x = 1 
      }
  }
@@ -110,12 +113,29 @@ const player = new Character ({
  gameLoop();
 
  window.addEventListener('keydown',(event) => {
+    
     switch(event.key){
         case 'd' : 
         keys.d.pressed = true
+        player.lastKey = 'd'
         break 
         case 'a' : 
         keys.a.pressed = true
+        player.lastKey = 'a'
+        break
+        case 'w' : 
+        player.velocity.y = -10
+        break
+        case 'ArrowRight' : 
+        keys.ArrowRight.pressed = true
+        enemy.lastKey = 'ArrowRight'
+        break 
+        case 'ArrowLeft' : 
+        keys.ArrowLeft.pressed = true
+        enemy.lastKey = 'ArrowLeft'
+        break
+        case 'ArrowUp' : 
+        enemy.velocity.y = -10
         break
     }
     console.log(event.key)
@@ -128,7 +148,22 @@ const player = new Character ({
         case 'a' : 
         keys.a.pressed = false
         break  
-        
+        case 'w' : 
+        keys.w.pressed = false
+        lastKey = 'w'
+        break
+
+    }
+
+    //enemy
+    switch(event.key){
+        case 'ArrowRight' : 
+        keys.ArrowRight.pressed = false
+        break 
+        case 'ArrowLeft' : 
+        keys.ArrowLeft.pressed = false
+        break  
+      
 
     }
     console.log(event.key)

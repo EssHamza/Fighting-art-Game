@@ -9,16 +9,25 @@ ctx.fillRect(0,0,canvas.width,canvas.height)
 const gravity = 0.7;
 
 class Character {
-    constructor({position, velocity}){
+    constructor({position, velocity,color = 'red'}){
         this.position = position 
         this.velocity = velocity
         this.height = 150
         this.lastKey
+        this.attackWeapon = {
+            position : this.position ,
+            width : 100,
+            height: 50
+        }
+        this.color =color
     }
 
     drawing(){
-        ctx.fillStyle = 'red'
+        ctx.fillStyle = this.color
         ctx.fillRect(this.position.x,this.position.y,50,this.height)
+        //attack weapon
+        ctx.fillStyle = 'yellow'
+        ctx.fillRect(this.attackWeapon.position.x,this.attackWeapon.position.y,this.attackWeapon.width,this.attackWeapon.height)
     }
 
     update(){
@@ -60,7 +69,8 @@ const player = new Character ({
     velocity : { 
         x: 0,
         y: 0
-}
+},
+color: 'blue'
 })
 
  const keys = {

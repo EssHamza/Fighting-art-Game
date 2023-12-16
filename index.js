@@ -13,26 +13,36 @@ class Character {
         this.position = position 
         this.velocity = velocity
         this.height = 150
+        this.width = 50
         this.lastKey
         this.attackWeapon = {
-            position : this.position ,
+            position : {
+                x : this.position.x,
+                y : this.position.y
+            } ,
             width : 100,
             height: 50
         }
-        this.color =color
+        this.color = color
+        this.isAttacking
     }
 
     drawing(){
         ctx.fillStyle = this.color
-        ctx.fillRect(this.position.x,this.position.y,50,this.height)
+        ctx.fillRect(this.position.x,this.position.y,this.width,this.height)
         //attack weapon
-        ctx.fillStyle = 'yellow'
-        ctx.fillRect(this.attackWeapon.position.x,this.attackWeapon.position.y,this.attackWeapon.width,this.attackWeapon.height)
+        //if(this.isAttacking){
+            ctx.fillStyle = 'yellow'
+            ctx.fillRect(this.attackWeapon.position.x,this.attackWeapon.position.y,this.attackWeapon.width,this.attackWeapon.height)
+
+        //}
     }
 
     update(){
      this.drawing()
-     
+     this.attackWeapon.position.x = this.position.x -50
+     this.attackWeapon.position.y = this.position.y
+
      this.position.x += this.velocity.x
      this.position.y += this.velocity.y
 
@@ -42,6 +52,12 @@ class Character {
      }else{
          this.velocity.y += gravity;
      } 
+  }
+  attack(){
+      this.isAttacking = true;
+      setTimeout(()=>{
+         this.isAttacking = false
+      },100)
   }
 }
 
@@ -59,7 +75,7 @@ const player = new Character ({
 
 
 
- //enemy
+ //enemy form
 
  const enemy = new Character ({
     position : {
@@ -118,6 +134,17 @@ color: 'blue'
      }else if (keys.d.pressed  && player.lastKey === 'd' ){
         player.velocity.x = 5 
      }
+
+     //detect collistion
+
+     if(player.attackWeapon.position.x +player.attackWeapon.width >= enemy.position.x 
+        && player.attackWeapon.position.x <= enemy.position.x + enemy.width 
+        && player.attackWeapon.position.y + player.attackWeapon.height >= enemy.position.y
+        && player.attackWeapon.position.y <= enemy.position.y + enemy.height 
+        && player.isAttacking){
+            player.isAttacking = false
+         console.log('wow')
+     }
  }
 
  gameLoop();
@@ -135,6 +162,9 @@ color: 'blue'
         break
         case 'w' : 
         player.velocity.y = -20
+        break
+        case ' ' : 
+        player.attack()
         break
         case 'ArrowRight' : 
         keys.ArrowRight.pressed = true

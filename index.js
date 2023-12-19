@@ -9,7 +9,7 @@ ctx.fillRect(0,0,canvas.width,canvas.height)
 const gravity = 0.7;
 
 class Character {
-    constructor({position, velocity,color = 'red'}){
+    constructor({position, velocity,color = 'red',offset}){
         this.position = position 
         this.velocity = velocity
         this.height = 150
@@ -20,27 +20,29 @@ class Character {
                 x : this.position.x,
                 y : this.position.y
             } ,
+            offset,
             width : 100,
             height: 50
         }
         this.color = color
         this.isAttacking
+        
     }
 
     drawing(){
         ctx.fillStyle = this.color
         ctx.fillRect(this.position.x,this.position.y,this.width,this.height)
         //attack weapon
-        //if(this.isAttacking){
+        if(this.isAttacking){
             ctx.fillStyle = 'yellow'
             ctx.fillRect(this.attackWeapon.position.x,this.attackWeapon.position.y,this.attackWeapon.width,this.attackWeapon.height)
 
-        //}
+        }
     }
 
     update(){
      this.drawing()
-     this.attackWeapon.position.x = this.position.x -50
+     this.attackWeapon.position.x = this.position.x + this.attackWeapon.offset.x
      this.attackWeapon.position.y = this.position.y
 
      this.position.x += this.velocity.x
@@ -70,6 +72,10 @@ const player = new Character ({
     velocity : { 
         x: 0,
         y: 10
+},
+offset : {
+    x : 0 , 
+    y : 0
 }
 })
 
@@ -85,6 +91,10 @@ const player = new Character ({
     velocity : { 
         x: 0,
         y: 0
+},
+offset : {
+    x : -50 , 
+    y : 0
 },
 color: 'blue'
 })
@@ -108,8 +118,18 @@ color: 'blue'
  }
 
 
-
-
+function rectangularCollision({
+    rectangle1,
+    rectangle2
+}){
+    return (
+        rectangle1.attackWeapon.position.x +rectangle1.attackWeapon.width >= rectangle2.position.x 
+        && rectangle1.attackWeapon.position.x <= rectangle2.position.x + rectangle2.width 
+        && rectangle1.attackWeapon.position.y + rectangle1.attackWeapon.height >= rectangle2.position.y
+        && rectangle1.attackWeapon.position.y <= rectangle2.position.y + rectangle2.height 
+        && rectangle1.isAttacking
+    )
+}
 
 
  function gameLoop(){
@@ -137,13 +157,23 @@ color: 'blue'
 
      //detect collistion
 
-     if(player.attackWeapon.position.x +player.attackWeapon.width >= enemy.position.x 
-        && player.attackWeapon.position.x <= enemy.position.x + enemy.width 
-        && player.attackWeapon.position.y + player.attackWeapon.height >= enemy.position.y
-        && player.attackWeapon.position.y <= enemy.position.y + enemy.height 
+     if(
+        rectangularCollision({
+            rectangle1 :player,
+            rectangle2 : enemy
+        })
         && player.isAttacking){
             player.isAttacking = false
          console.log('wow')
+     }
+     if(
+        rectangularCollision({
+            rectangle1 :enemy,
+            rectangle2 : player
+        })
+        && enemy.isAttacking){
+            enemy.isAttacking = false
+         console.log('woww enemy attacks')
      }
  }
 
@@ -176,6 +206,9 @@ color: 'blue'
         break
         case 'ArrowUp' : 
         enemy.velocity.y = -20
+        break
+        case 'ArrowDown' : 
+        enemy.attack()
         break
     }
     console.log(event.key)

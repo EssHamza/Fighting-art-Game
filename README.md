@@ -6,10 +6,6 @@ Welcome to **2D Pixel Fighter**, a captivating retro-style 2D fighting game desi
 
 Experience **2D Pixel Fighter** now by visiting [2D Pixel Fighter Live](https://esshamza.github.io/Fighting-art-Game/). Remember, it's a two-player, offline game that looks awesome and is perfect for friendly competitive play!
 
-## Game Instructions
-
-- **Start Screen:** The game opens with a start screen. Press the start button to launch a two-player game.
-- **Character Selection:** Choose from a roster of unique pixel art characters.
 
 ### Controls
 
@@ -48,3 +44,7 @@ We welcome contributions! If you have ideas for improvements or new features:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+
+
+enjoy playing
+

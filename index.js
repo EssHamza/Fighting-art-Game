@@ -156,7 +156,7 @@ function rectangularCollision({
         player.velocity.x = 5 
      }
 
-     //detect collistion
+     //detect collison
 
      if(
         rectangularCollision({
@@ -167,7 +167,7 @@ function rectangularCollision({
             player.isAttacking = false
          console.log('wow')
          enemy.health -= 20
-         document.querySelector("#enemyHealth").style.width = enemy.health + '%'
+         document.querySelector("#enemyHealth").style.width = '20%'
      }
      if(
         rectangularCollision({
@@ -176,8 +176,7 @@ function rectangularCollision({
         })
         && enemy.isAttacking){
             enemy.isAttacking = false
-            player.health -= 20
-            document.querySelector("#playerHealth").style.width = player.health + '%'
+
      
          console.log('woww enemy attacks')
      }
@@ -249,3 +248,4 @@ function rectangularCollision({
  })
  // now i'm figuring out how to add actual art work for this game 
  //while learning nodejs and express
+ //128 

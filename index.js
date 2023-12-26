@@ -26,6 +26,7 @@ class Character {
         }
         this.color = color
         this.isAttacking
+        this.health = 100
         
     }
 
@@ -165,6 +166,8 @@ function rectangularCollision({
         && player.isAttacking){
             player.isAttacking = false
          console.log('wow')
+         enemy.health -= 20
+         document.querySelector("#enemyHealth").style.width = enemy.health + '%'
      }
      if(
         rectangularCollision({
@@ -173,6 +176,9 @@ function rectangularCollision({
         })
         && enemy.isAttacking){
             enemy.isAttacking = false
+            player.health -= 20
+            document.querySelector("#playerHealth").style.width = player.health + '%'
+     
          console.log('woww enemy attacks')
      }
  }
@@ -186,7 +192,7 @@ function rectangularCollision({
         keys.d.pressed = true
         player.lastKey = 'd'
         break 
-        case 'a' : 
+        case 'q' : 
         keys.a.pressed = true
         player.lastKey = 'a'
         break
@@ -243,4 +249,3 @@ function rectangularCollision({
  })
  // now i'm figuring out how to add actual art work for this game 
  //while learning nodejs and express
- 

@@ -167,7 +167,7 @@ function rectangularCollision({
             player.isAttacking = false
          console.log('wow')
          enemy.health -= 20
-         document.querySelector("#enemyHealth").style.width = '20%'
+         document.querySelector("#enemyHealth").style.width = enemy.health + "%"
      }
      if(
         rectangularCollision({
@@ -176,9 +176,10 @@ function rectangularCollision({
         })
         && enemy.isAttacking){
             enemy.isAttacking = false
-
-     
          console.log('woww enemy attacks')
+         player.health -= 20
+         document.querySelector("#playerHealth").style.width = player.health + "%"
+
      }
  }
 

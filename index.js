@@ -131,8 +131,19 @@ function rectangularCollision({
         && rectangle1.isAttacking
     )
 }
+let timer = 10
+function decrese(){
+setTimeout(decrese,1000)
+    if(timer>0)
+     {timer--
+    document.querySelector("#timer").innerHTML= timer
+   }
 
-
+   if(player.health === enemy.health){
+       console.log('tiee')
+   }
+}
+decrese()
  function gameLoop(){
      window.requestAnimationFrame(gameLoop)
      ctx.fillStyle = 'black'

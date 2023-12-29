@@ -202,6 +202,7 @@ decrese()
          document.querySelector("#playerHealth").style.width = player.health + "%"
 
      }
+    
  }
 
  gameLoop();
@@ -270,5 +271,4 @@ decrese()
  })
  // now i'm figuring out how to add actual art work for this game 
  //while learning nodejs and express
- //128 
- //128 still on it 
+ //147 still on it 

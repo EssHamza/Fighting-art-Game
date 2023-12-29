@@ -134,14 +134,24 @@ function rectangularCollision({
 let timer = 10
 function decrese(){
 setTimeout(decrese,1000)
-    if(timer>0)
-     {timer--
+    if(timer > 0){
+    timer--
     document.querySelector("#timer").innerHTML= timer
    }
 
-   if(player.health === enemy.health){
+    if ( timer === 0 ){
+    document.querySelector('#display').style.display = 'flex'
+    
+      if(player.health === enemy.health){
        console.log('tiee')
-   }
+        document.querySelector('#display').innerHTML = 'Tie'
+    } else if ( player.health > enemy.health){
+        document.querySelector('#display').innerHTML = 'Player Wins'
+    } else if ( player.health < enemy.health){
+        document.querySelector('#display').innerHTML = 'Enemy Wins'
+
+    }
+  }
 }
 decrese()
  function gameLoop(){

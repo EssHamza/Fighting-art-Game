@@ -131,29 +131,38 @@ function rectangularCollision({
         && rectangle1.isAttacking
     )
 }
-let timer = 10
+
+function whoWins({player,enemy,timerId}){
+   clearTimeout(timerId)
+    document.querySelector('#display').style.display = 'flex'
+    if(player.health === enemy.health){
+        console.log('tiee')
+         document.querySelector('#display').innerHTML = 'Tie'
+     } else if ( player.health > enemy.health){
+         document.querySelector('#display').innerHTML = 'Player Wins'
+     } else if ( player.health < enemy.health){
+         document.querySelector('#display').innerHTML = 'Enemy Wins'
+ 
+     }
+}
+
+let timer = 50
+let timerId
 function decrese(){
-setTimeout(decrese,1000)
+timerId = setTimeout(decrese,1000)
     if(timer > 0){
     timer--
     document.querySelector("#timer").innerHTML= timer
    }
 
     if ( timer === 0 ){
-    document.querySelector('#display').style.display = 'flex'
     
-      if(player.health === enemy.health){
-       console.log('tiee')
-        document.querySelector('#display').innerHTML = 'Tie'
-    } else if ( player.health > enemy.health){
-        document.querySelector('#display').innerHTML = 'Player Wins'
-    } else if ( player.health < enemy.health){
-        document.querySelector('#display').innerHTML = 'Enemy Wins'
-
-    }
+    whoWins({player,enemy,timerId})
   }
 }
 decrese()
+
+
  function gameLoop(){
      window.requestAnimationFrame(gameLoop)
      ctx.fillStyle = 'black'
@@ -203,6 +212,11 @@ decrese()
 
      }
     
+     //gameOver
+     if(enemy.health <= 0 || player.health <= 0 ){
+      whoWins({player,enemy,timerId})
+     }
+
  }
 
  gameLoop();

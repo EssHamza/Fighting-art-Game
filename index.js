@@ -8,6 +8,26 @@ ctx.fillRect(0,0,canvas.width,canvas.height)
 
 const gravity = 0.7;
 
+
+class Sprite {
+    constructor({position,imageSrc}){
+        this.position = position 
+        this.height = 150
+        this.width = 50
+        this.image = new Image()
+        this.image.src = imageSrc
+    }
+
+    drawing(){ 
+        ctx.drawImage(this.image , this.position.x ,this.position.y)
+    }
+    update(){
+          this.drawing()
+    
+  }
+ 
+}
+
 class Character {
     constructor({position, velocity,color = 'red',offset}){
         this.position = position 
@@ -64,6 +84,14 @@ class Character {
   }
 }
 
+//background
+const background = new Sprite ({
+    position : {
+        x : 0,
+        y : 0
+    },
+    imageSrc : "background.png"
+})
 //player 
 const player = new Character ({
     position : {
@@ -167,6 +195,7 @@ decrese()
      window.requestAnimationFrame(gameLoop)
      ctx.fillStyle = 'black'
      ctx.fillRect(0,0,canvas.width ,canvas.height)
+     background.update()
      player.update()
      enemy.update()
 
@@ -285,4 +314,4 @@ decrese()
  })
  // now i'm figuring out how to add actual art work for this game 
  //while learning nodejs and express
- //153s still on it 
+ //154s still on it 

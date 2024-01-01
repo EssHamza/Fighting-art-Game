@@ -285,4 +285,4 @@ decrese()
  })
  // now i'm figuring out how to add actual art work for this game 
  //while learning nodejs and express
- //147 still on it 
+ //153s still on it 

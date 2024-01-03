@@ -69,7 +69,7 @@ class Character {
      this.position.x += this.velocity.x
      this.position.y += this.velocity.y
 
-     if(this.position.y + this.height + this.velocity.y  >= canvas.height){
+     if(this.position.y + this.height + this.velocity.y  >= canvas.height - 96){
         this.velocity.y = 0
         
      }else{
@@ -315,4 +315,4 @@ decrese()
  // now i'm figuring out how to add actual art work for this game 
  
  //while learning nodejs and express
- //204s still on it 
+ //222s still on it 

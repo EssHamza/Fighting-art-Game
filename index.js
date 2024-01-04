@@ -28,7 +28,7 @@ class Sprite {
  
 }
 
-class Character extends Sprite {
+class Character  {
     constructor({position, velocity,color = 'red',offset}){
         this.position = position 
         this.velocity = velocity
@@ -50,16 +50,16 @@ class Character extends Sprite {
         
     }
 
-   // drawing(){
-    ///    ctx.fillStyle = this.color
-    //   ctx.fillRect(this.position.x,this.position.y,this.width,this.height)
+   drawing(){
+        ctx.fillStyle = this.color
+     ctx.fillRect(this.position.x,this.position.y,this.width,this.height)
     //attack weapon
-    //  if(this.isAttacking){
-    //      ctx.fillStyle = 'yellow'
-    //      ctx.fillRect(this.attackWeapon.position.x,this.attackWeapon.position.y,this.attackWeapon.width,this.attackWeapon.height)
+      if(this.isAttacking){
+        ctx.fillStyle = 'yellow'
+         ctx.fillRect(this.attackWeapon.position.x,this.attackWeapon.position.y,this.attackWeapon.width,this.attackWeapon.height)
     
-    //  }
-  //  }
+      }
+   }
 
     update(){
      this.drawing()

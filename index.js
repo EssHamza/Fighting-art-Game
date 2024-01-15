@@ -92,6 +92,15 @@ const background = new Sprite ({
     },
     imageSrc : "background.png"
 })
+//shop changeble
+
+const shop = new Sprite ({
+    position : {
+        x : 0,
+        y : 0
+    },
+    imageSrc : "shop.png"
+})
 //player 
 const player = new Character ({
     position : {
@@ -196,6 +205,7 @@ decrese()
      ctx.fillStyle = 'black'
      ctx.fillRect(0,0,canvas.width ,canvas.height)
      background.update()
+     shop.update()
      player.update()
      enemy.update()
 

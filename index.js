@@ -103,10 +103,11 @@ const background = new Sprite ({
 
 const shop = new Sprite ({
     position : {
-        x : 0,
-        y : 0
+        x : 600,
+        y : 160
     },
-    imageSrc : "shop.png"
+    imageSrc : "shop.png",
+    scale : 2.5
 })
 //player 
 const player = new Character ({
@@ -332,4 +333,4 @@ decrese()
  // now i'm figuring out how to add actual art work for this game 
  
  //while learning nodejs and express
- //222s still on it 
+ //2:11:34s still on it 

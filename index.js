@@ -10,16 +10,23 @@ const gravity = 0.7;
 
 
 class Sprite {
-    constructor({position,imageSrc}){
+    constructor({position,imageSrc,scale =1}){
         this.position = position 
         this.height = 150
         this.width = 50
         this.image = new Image()
         this.image.src = imageSrc
+        this.scale = scale
     }
 
     drawing(){ 
-        ctx.drawImage(this.image , this.position.x ,this.position.y)
+        ctx.drawImage(
+            this.image , 
+            this.position.x,
+            this.position.y,
+            this.image.width *this.scale,
+            this.image.height* this.scale
+            )
     }
     update(){
           this.drawing()
